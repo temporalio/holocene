@@ -1,13 +1,4 @@
-<script lang="ts">
-	import Navigation from '$lib/components/navigation/index.svelte';
-</script>
-
-<div class="container">
-	<Navigation />
+<div class="p-8">
+  <h1 class="text-2xl">Welcome to Jiffy!</h1>
+  <p>Temporal's Shared UI Library</p>
 </div>
-
-<style lang="postcss">
-	.container {
-		@apply h-screen;
-	}
-</style>

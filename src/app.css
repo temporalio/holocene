@@ -9,12 +9,12 @@
 *,
 html,
 body {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	font-family: Inter, sans-serif;
-	position: relative;
+  font-family: Inter, sans-serif;
+  position: relative;
 }
 
 h1,
@@ -25,10 +25,22 @@ h5,
 h6,
 titles,
 labels {
-	font-family: Poppins, sans-serif;
+  font-family: Poppins, sans-serif;
 }
 
 .hljs {
-	max-height: 25em;
-	overflow-y: scroll;
+  max-height: 25em;
+  overflow-y: scroll;
+}
+
+@layer components {
+  .nav-row {
+    @apply flex flex-row font-secondary font-medium text-sm;
+  }
+}
+
+@layer utilities {
+  .cloud {
+    @apply bg-white text-gray-900;
+  }
 }
