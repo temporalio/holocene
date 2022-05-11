@@ -1,18 +1,18 @@
 <script lang="ts">
 	import Icon from 'svelte-fa';
 
-	import { faSort } from '@fortawesome/pro-solid-svg-icons/faSort';
 	import NavRow from './_nav-row.svelte';
 	import Logo from '$lib/components/logo/index.svelte';
 	import Logout from '$lib/components/logout/index.svelte';
 
-	import { faArrowRightFromBracket } from '@fortawesome/pro-light-svg-icons/faArrowRightFromBracket';
-	import { faCodeSimple } from '@fortawesome/pro-light-svg-icons/faCodeSimple';
-	import { faGear } from '@fortawesome/pro-light-svg-icons/faGear';
-	import { faCalendarWeek } from '@fortawesome/pro-light-svg-icons/faCalendarWeek';
-	import { faChartLine } from '@fortawesome/pro-light-svg-icons/faChartLine';
-	import { faServer } from '@fortawesome/pro-light-svg-icons/faServer';
-	import { UserData } from '$lib/stores/auth-store';
+	import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+	import { faCode } from '@fortawesome/free-solid-svg-icons';
+	import { faCog } from '@fortawesome/free-solid-svg-icons';
+	import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+	import { faServer } from '@fortawesome/free-solid-svg-icons';
+	import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+	import { faSort } from '@fortawesome/free-solid-svg-icons';
+
 	import { routes } from '$lib/routes';
 
 	let showProfilePic = true;
@@ -41,11 +41,11 @@
 				<div class="col-span-4">Observability</div>
 			</NavRow>
 			<NavRow link={routes.schedules}>
-				<Icon icon={faCalendarWeek} scale={1.2} class="col-span-1 mt-1" />
+				<Icon icon={faCalendar} scale={1.2} class="col-span-1 mt-1" />
 				<div class="col-span-4">Schedules</div>
 			</NavRow>
 			<NavRow link={routes.devTools}>
-				<Icon icon={faCodeSimple} scale={1.2} class="col-span-1 mt-1" />
+				<Icon icon={faCode} scale={1.2} class="col-span-1 mt-1" />
 				<div class="col-span-4">Dev Tools</div>
 			</NavRow>
 		</ul>
@@ -53,42 +53,21 @@
 	<div class="absolute bottom-28 w-10/12">
 		<ul class="space-y-5">
 			<NavRow
-				><Icon icon={faGear} scale={1.2} class="col-span-1 mt-1" />
+				><Icon icon={faCog} scale={1.2} class="col-span-1 mt-1" />
 				<div class="col-span-4">Settings</div>
 			</NavRow>
 			<NavRow>
-				<Icon icon={faArrowRightFromBracket} scale={1} class="col-span-1 mt-1 text-right " />
+				<Icon icon={faArrowRight} scale={1} class="col-span-1 mt-1 text-right " />
 				<div class="col-span-4"><Logout /></div>
 			</NavRow>
 			<NavRow>
-				{#await $UserData}
 					<div class="motion-safe:animate-pulse col-span-1">
 						<div class="rounded-full bg-blue-200 h-full aspect-square" />
 					</div>
 					<div class="col-span-4"><div class="h-2 bg-blue-50 rounded mt-1" /></div>
-				{:then user}<div class="col-span-1">
-						{#if user?.picture}
-							<img
-								src={user?.picture}
-								alt={user?.profile}
-								class="rounded-md"
-								on:error={fixImage}
-								class:hidden={!showProfilePic}
-							/>
-							<div
-								class="rounded-full bg-blue-200 h-full  aspect-square"
-								class:hidden={showProfilePic}
-							/>
-						{/if}
+					<div class="col-span-4">
+						Profile
 					</div>
-					<div class="col-span-4  ">
-						{#if user?.name}
-							{user?.name}
-						{:else}
-							Profile
-						{/if}
-					</div>
-				{/await}
 			</NavRow>
 		</ul>
 	</div>

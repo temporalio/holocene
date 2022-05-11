@@ -36,8 +36,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@fortawesome/fontawesome-pro": "^6.1.1",
-    "@fortawesome/pro-light-svg-icons": "^6.1.1",
-    "@fortawesome/pro-solid-svg-icons": "^6.1.1"
+    "@fortawesome/free-solid-svg-icons": "^5.15.4"
   }
 }

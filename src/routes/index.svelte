@@ -3,5 +3,4 @@
 
 <h1>
 	Welcome to Jiffy!
-
 </h1>
