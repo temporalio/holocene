@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { AuthStore } from '$lib/stores/auth-store';
-
 	const logout = async () => {
-		(await $AuthStore).logout({
-			returnTo: window.location.origin
-		});
+		console.log("Logging out...")
+		// (await $AuthStore).logout({
+		// 	returnTo: window.location.origin
+		// });
 	};
 </script>
 
