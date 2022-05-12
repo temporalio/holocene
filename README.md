@@ -1,20 +1,6 @@
-# create-svelte
+# Holocene
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
-```
-
-> Note: the `@next` is temporary
+Temporal's shared UI library
 
 ## Developing
 
@@ -27,14 +13,28 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+## Packaging
 
-To create a production version of your app:
+To link and watch for changes 
 
 ```bash
-npm run build
+cd package
+npm link
+cd ..
+npm run package -- --watch
 ```
 
-You can preview the production build with `npm run preview`.
+In ui or cloud-ui
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+npm link holocene
+```
+
+
+To publish to NPM registry
+
+```bash
+npm run package
+cd package
+npm publish
+```
