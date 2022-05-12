@@ -12,3 +12,9 @@
     <slot />
   {/if}
 </li>
+
+<style lang="postcss">
+  .nav-row {
+    @apply flex flex-row font-secondary font-medium text-sm;
+  }
+</style>
