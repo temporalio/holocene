@@ -1,5 +1,5 @@
 {
-  "name": "jiffy",
+  "name": "holocene",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -36,6 +36,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.15.4"
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "svelte2tsx": "^0.5.9"
   }
 }
