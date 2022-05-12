@@ -18,6 +18,7 @@ npm run dev -- --open
 To link and watch for changes 
 
 ```bash
+npm run package
 cd package
 npm link
 cd ..
