@@ -68,14 +68,14 @@
       <NewIcon name={$navOpen ? 'caretLeft' : 'caretRight'} scale={1.2} />
     </button>
     <div class="mt-16">
-      <ul class="space-y-2">
+      <ul class="space-y-1">
         <NavRow class="mb-8">
           <div class="cursor-pointer flex" on:click={toggleNamespaceSelector}>
             <div class="nav-icon">
               <Icon icon={faServer} scale={1.2} />
             </div>
             <div class="nav-title namespace mt-2">{namespace}</div>
-            <div class="inline-block mr-1 mt-3">
+            <div class="inline-block mr-1 mt-2">
               <Icon icon={faSort} scale={0.9} />
             </div>
           </div>
@@ -113,7 +113,7 @@
       </ul>
     </div>
     <div class="absolute bottom-28">
-      <ul class="space-y-2">
+      <ul class="space-y-1">
         {#if extras}
           {#each extras as extra}
             <NavRow>
@@ -178,11 +178,12 @@
     flyout={namespaceSelectorOpen === false}
     on:click={() => (namespaceSelectorOpen = false)}
   >
-    <div class="prose mt-16">
-      <h2>Select a namespace to navigate to</h2>
-    </div>
     {#if namespaceSelectorOpen}
-      <NamespaceList lastUsedNamespace={$lastUsedNamespace} {namespaceList} />
+      <NamespaceList
+        lastUsedNamespace={$lastUsedNamespace}
+        {namespaceList}
+        activeNamespace={namespace}
+      />
     {/if}
   </Drawer>
 </nav>
@@ -195,7 +196,7 @@
     transition: width 0.25s linear, max-width 0.25s linear;
   }
   .nav-icon {
-    @apply w-8 h-6 ml-6 mt-3;
+    @apply w-8 h-6 ml-6 mt-2;
   }
   .nav-title {
     max-width: 200px;
