@@ -1,6 +1,9 @@
 <script lang="ts">
   export let flyin: boolean;
   export let flyout: boolean;
+  import { navOpen } from '$lib/stores/nav-open';
+
+  import NewIcon from '$lib/components/icon/index.svelte';
 </script>
 
 <div
@@ -8,6 +11,11 @@
   class:flyin
   class:flyout
 >
+  <div class="relative">
+    <div class="absolute right-0 top-0 cursor-pointer" on:click>
+      <NewIcon name="close" color="black" />
+    </div>
+  </div>
   <slot />
 </div>
 

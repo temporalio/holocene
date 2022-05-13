@@ -1,4 +1,5 @@
 export const routes = {
+  archive: '/archive',
   workflows: '/workflows',
   observability: 'observability',
   schedules: '/schedules',
