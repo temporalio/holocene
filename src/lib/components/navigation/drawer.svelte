@@ -57,12 +57,4 @@
   .transition-width {
     transition: width 0.25s linear, max-width 0.25s linear;
   }
-  .nav-icon {
-    @apply w-8 ml-6 mt-1;
-  }
-  .nav-title {
-    max-width: 100px;
-    overflow: hidden;
-    transition: max-width 0.25s linear;
-  }
 </style>
