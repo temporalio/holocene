@@ -1,7 +1,6 @@
 <script lang="ts">
   export let flyin: boolean;
   export let flyout: boolean;
-  import { navOpen } from '$lib/stores/nav-open';
 
   import NewIcon from '$lib/components/icon/index.svelte';
 </script>
