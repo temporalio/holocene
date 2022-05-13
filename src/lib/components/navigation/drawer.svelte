@@ -14,25 +14,21 @@
 <style lang="postcss">
   @keyframes flyin {
     0% {
-      opacity: 1;
       right: 0;
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
         0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
     100% {
-      opacity: 1;
       right: -40vw;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     }
   }
   @keyframes flyout {
     0% {
-      opacity: 1;
       right: -40vw;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     }
     100% {
-      opacity: 1;
       right: 0;
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
         0 4px 6px -4px rgb(0 0 0 / 0.1);
