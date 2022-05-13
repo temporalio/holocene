@@ -4,6 +4,10 @@
   export let namespaces: null | Promise<string[]>;
   export let lastUsedNamespace: string | null;
   $: searchValue = '';
+
+  function getHref(namespace: string) {
+    return `https://web.${namespace}.tmprl.cloud/`;
+  }
 </script>
 
 <div class="flex border rounded-full p-1 mb-5">
@@ -23,7 +27,7 @@
           class="first:rounded-t-md first:border-t last:rounded-b-md border-b border-l border-r  p-3 flex border-collapse"
         >
           <a
-            href={`https://web.${namespace}.tmprl.cloud/`}
+            href={getHref(namespace)}
             class={`underline ${
               lastUsedNamespace === namespace
                 ? 'text-blue-900'

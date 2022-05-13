@@ -1,3 +1,3 @@
 import { persistStore } from './persist-store';
 
-export const navOpen = persistStore('navOpen', true);
+export const navOpen = persistStore('navOpen', false);

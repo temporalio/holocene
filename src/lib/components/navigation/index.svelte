@@ -4,7 +4,7 @@
 
   import { user } from '$lib/stores/user';
   import { navOpen } from '$lib/stores/nav-open';
-  import { namespaceList, lastUsedNamespace } from '$lib/stores/namespaces';
+  import { lastUsedNamespace } from '$lib/stores/namespaces';
 
   import NavRow from './_nav-row.svelte';
   import Logo from '$lib/components/logo/index.svelte';
@@ -18,9 +18,9 @@
   import { faSort } from '@fortawesome/free-solid-svg-icons';
 
   import { routes } from '$lib/routes';
-  import PopoutList from './popout-list.svelte';
+  import Drawer from './drawer.svelte';
 
-  export let isCloud = true;
+  export let namespaces: null | Promise<string[]> = null;
 
   let showProfilePic = true;
   let namespaceSelectorOpen: boolean | null = null;
@@ -35,25 +35,25 @@
   }
 </script>
 
+<svelte:head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</svelte:head>
+
 <nav
-  class="bg-gray-900 text-white h-full border-r-2 border-gray-200 relative flex transition-width z-0"
+  class="h-full border-r-2 border-gray-200 relative flex transition-width z-0"
 >
   <div
     id="navWrapper"
-    class="transition-width overflow-hidden z-50 pt-3 pr-2"
+    class="transition-width bg-gray-900 text-white overflow-hidden z-50 pt-3 pr-2"
     class:open={$navOpen}
     class:close={!$navOpen}
-    class:cloud={isCloud}
-    class:namespaceOpen={namespaceSelectorOpen}
   >
-    <div class="">
-      <div class="mt-2 ml-3">
-        <Logo height="36px" width="36px" {isCloud} />
-      </div>
-      <button class="absolute right-2 top-6" on:click={toggleNav}>
-        {$navOpen ? '<' : '>'}
-      </button>
+    <div class="mt-2 ml-3">
+      <Logo height="36px" width="36px" />
     </div>
+    <button class="absolute right-2 top-6" on:click={toggleNav}>
+      {$navOpen ? '<' : '>'}
+    </button>
     <div class="mt-16">
       <ul class="space-y-5">
         <NavRow class="mb-8 ">
@@ -61,7 +61,7 @@
             <div class="nav-icon ">
               <Icon icon={faServer} scale={1.2} />
             </div>
-            <div class="nav-title namespace">Go to workflow</div>
+            <div class="nav-title namespace">Go to namespace</div>
             <div class="inline-block mr-2 mt-1">
               <Icon icon={faSort} scale={0.9} />
             </div>
@@ -70,7 +70,7 @@
         {#if $lastUsedNamespace}
           <NavRow link={`https://web.${$lastUsedNamespace}.tmprl.cloud/`}>
             <div class="nav-icon ">
-              <NewIcon name="workflow" scale={1.2} {isCloud} />
+              <NewIcon name="workflow" scale={1.2} />
             </div>
             <div class="nav-title">Workflows</div>
           </NavRow>
@@ -83,13 +83,13 @@
         </NavRow>
         <NavRow link={routes.schedules}>
           <div class="nav-icon ">
-            <NewIcon name="calendar" scale={1.2} {isCloud} />
+            <NewIcon name="calendar" scale={1.2} />
           </div>
           <div class="nav-title">Schedules</div>
         </NavRow>
         <NavRow link={routes.devTools}>
           <div class="nav-icon ">
-            <NewIcon name="bracket" scale={1.2} {isCloud} />
+            <NewIcon name="bracket" scale={1.2} />
           </div>
           <div class="nav-title">Dev Tools</div>
         </NavRow>
@@ -156,7 +156,7 @@
       </ul>
     </div>
   </div>
-  <PopoutList
+  <Drawer
     flyin={namespaceSelectorOpen === true}
     flyout={namespaceSelectorOpen === false}
   >
@@ -164,12 +164,9 @@
       <h2>Select a namespace to navigate to</h2>
     </div>
     {#if namespaceSelectorOpen}
-      <NamespaceList
-        lastUsedNamespace={$lastUsedNamespace}
-        namespaces={$namespaceList}
-      />
+      <NamespaceList lastUsedNamespace={$lastUsedNamespace} {namespaces} />
     {/if}
-  </PopoutList>
+  </Drawer>
 </nav>
 
 <style lang="postcss">
@@ -177,7 +174,7 @@
     transition: width 0.25s linear, max-width 0.25s linear;
   }
   .nav-icon {
-    @apply w-8 ml-6;
+    @apply w-8 ml-6 mt-1;
   }
   .nav-title {
     max-width: 100px;
@@ -192,6 +189,6 @@
     margin-right: 15px;
   }
   .open .namespace {
-    max-width: 80px;
+    max-width: 100px;
   }
 </style>
