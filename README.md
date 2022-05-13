@@ -15,7 +15,7 @@ npm run dev -- --open
 
 ## Packaging
 
-To link and watch for changes 
+To link and watch for changes
 
 ```bash
 npm run package
@@ -30,7 +30,6 @@ In ui or cloud-ui
 ```bash
 npm link holocene
 ```
-
 
 To publish to NPM registry
 
