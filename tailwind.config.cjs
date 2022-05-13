@@ -136,7 +136,6 @@ const temporalColors = {
 const config = {
   content: [
     './src/**/*.{html,js,svelte,ts}',
-    './package/**/*.{html,js,svelte,ts}'
   ],
   theme: {
     colors: temporalColors,
