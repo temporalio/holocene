@@ -18,7 +18,7 @@
   import { faSort } from '@fortawesome/free-solid-svg-icons';
 
   import { routes } from '$lib/routes';
-  import PopoutList from './popout-list.svelte';
+  import Drawer from './drawer.svelte';
 
   export let namespaces: null | Promise<string[]> = null;
 
@@ -35,6 +35,10 @@
   }
 </script>
 
+<svelte:head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</svelte:head>
+
 <nav
   class="h-full border-r-2 border-gray-200 relative flex transition-width z-0"
 >
@@ -43,9 +47,8 @@
     class="transition-width bg-gray-900 text-white overflow-hidden z-50 pt-3 pr-2"
     class:open={$navOpen}
     class:close={!$navOpen}
-    class:namespaceOpen={namespaceSelectorOpen}
   >
-    <div class="mt-2 ml-3 m-24">
+    <div class="mt-2 ml-3">
       <Logo height="36px" width="36px" />
     </div>
     <button class="absolute right-2 top-6" on:click={toggleNav}>
@@ -58,7 +61,7 @@
             <div class="nav-icon ">
               <Icon icon={faServer} scale={1.2} />
             </div>
-            <div class="nav-title namespace">Go to workflow</div>
+            <div class="nav-title namespace">Go to namespace</div>
             <div class="inline-block mr-2 mt-1">
               <Icon icon={faSort} scale={0.9} />
             </div>
@@ -153,7 +156,7 @@
       </ul>
     </div>
   </div>
-  <PopoutList
+  <Drawer
     flyin={namespaceSelectorOpen === true}
     flyout={namespaceSelectorOpen === false}
   >
@@ -163,7 +166,7 @@
     {#if namespaceSelectorOpen}
       <NamespaceList lastUsedNamespace={$lastUsedNamespace} {namespaces} />
     {/if}
-  </PopoutList>
+  </Drawer>
 </nav>
 
 <style lang="postcss">
@@ -186,6 +189,6 @@
     margin-right: 15px;
   }
   .open .namespace {
-    max-width: 80px;
+    max-width: 100px;
   }
 </style>
