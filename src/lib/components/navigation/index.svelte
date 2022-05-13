@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { SvelteComponent } from 'svelte';
+
   import Icon from 'svelte-fa';
   import NewIcon from '$lib/components/icon/index.svelte';
 
@@ -12,7 +14,6 @@
   import NamespaceList from '$lib/components/namespace-list/index.svelte';
 
   import {
-    faArrowRight,
     faCalendarWeek,
     faCode,
     faCog,
@@ -25,6 +26,9 @@
   import { routes } from '$lib/routes';
   import Drawer from './drawer.svelte';
 
+  export let theme: 'cloud' | 'oss' = 'oss';
+  export let extras: { icon: typeof SvelteComponent; name: string }[] | null =
+    null;
   export let namespace = 'default';
   export let namespaceList: null | Promise<
     { namespace: string; href: string; onClick: () => void }[]
@@ -53,6 +57,7 @@
   <div
     id="navWrapper"
     class="transition-width bg-gray-900 text-white overflow-hidden z-50 pt-3 pr-2"
+    class:cloud={theme === 'cloud'}
     class:open={$navOpen}
     class:close={!$navOpen}
   >
@@ -85,14 +90,14 @@
           </NavRow>
         {/if}
         <NavRow link={routes.schedules}>
-          <div class="nav-icon ">
+          <div class="nav-icon">
             <Icon icon={faCalendarWeek} scale={1.2} />
             <!-- <NewIcon name="calendar" scale={1.2} /> -->
           </div>
           <div class="nav-title">Schedules</div>
         </NavRow>
         <NavRow link={routes.archive}>
-          <div class="nav-icon ">
+          <div class="nav-icon">
             <Icon icon={faRedo} scale={1.2} />
             <!-- <NewIcon name="refresh" scale={0.8} /> -->
           </div>
@@ -107,17 +112,21 @@
         </NavRow>
       </ul>
     </div>
-    <div class="absolute bottom-28 ">
+    <div class="absolute bottom-28">
       <ul class="space-y-2">
+        {#if extras}
+          {#each extras as extra}
+            <NavRow>
+              <div class="nav-icon">
+                <svelte:component this={extra.icon} />
+              </div>
+              <div class="nav-title">{extra.name}</div>
+            </NavRow>
+          {/each}
+        {/if}
         <NavRow>
-          <div class="nav-icon "><Icon icon={faCog} scale={1.2} /></div>
+          <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
           <div class="nav-title">Settings</div>
-        </NavRow>
-        <NavRow>
-          <div class="nav-icon ">
-            <Icon icon={faArrowRight} scale={1} class="text-right" />
-          </div>
-          <div class="nav-title"><Logout /></div>
         </NavRow>
         <NavRow>
           {#await $user}
@@ -179,6 +188,9 @@
 </nav>
 
 <style lang="postcss">
+  .cloud {
+    @apply bg-white text-gray-900;
+  }
   .transition-width {
     transition: width 0.25s linear, max-width 0.25s linear;
   }

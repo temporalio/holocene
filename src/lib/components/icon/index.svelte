@@ -6,7 +6,7 @@
   export let width = 24;
   export let height = 24;
   export let isCloud = false;
-  export let color = isCloud ? '#111827' : '#ffffff';
+  export let color = '#ffffff';
   export let rotate = 0;
   export let scale = 1;
   export let active = false;
@@ -28,7 +28,7 @@
     {#each paths as path}
       <path
         d={path}
-        stroke={active ? 'white' : color}
+        stroke={color}
         stroke-width="1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
