@@ -1,5 +1,7 @@
 <script lang="ts">
-  const logout = async () => {
+  export let logout: () => void;
+
+  const logoutWithAuthStore = async () => {
     console.log('Logging out...');
     // (await $AuthStore).logout({
     // 	returnTo: window.location.origin

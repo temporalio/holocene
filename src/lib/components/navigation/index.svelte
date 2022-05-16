@@ -4,7 +4,6 @@
   import Icon from 'svelte-fa';
   import NewIcon from '$lib/components/icon/index.svelte';
 
-  import { user } from '$lib/stores/user';
   import { navOpen } from '$lib/stores/nav-open';
   import { lastUsedNamespace } from '$lib/stores/namespaces';
 
@@ -12,30 +11,36 @@
   import Logo from '$lib/components/logo/index.svelte';
   import Logout from '$lib/components/logout/index.svelte';
   import NamespaceList from '$lib/components/namespace-list/index.svelte';
+  import Drawer from '$lib/components/navigation/drawer.svelte';
+  import IsCloudGuard from '$lib/components/guard/is-cloud-guard.svelte';
 
   import {
-    faCalendarWeek,
-    faCode,
+    faArrowAltCircleRight,
     faCog,
     faHeartbeat,
+    faLocationArrow,
     faRedo,
     faServer,
     faSort,
   } from '@fortawesome/free-solid-svg-icons';
 
-  import { routes } from '$lib/routes';
-  import Drawer from './drawer.svelte';
+  import type { routes } from '$lib/routes';
 
+  export let isCloud: boolean;
   export let theme: 'cloud' | 'oss' = 'oss';
   export let extras: { icon: typeof SvelteComponent; name: string }[] | null =
     null;
-  export let namespace = 'default';
+  export let activeNamespace = 'default';
   export let namespaceList: null | Promise<
     { namespace: string; href: string; onClick: () => void }[]
   > = null;
+  export let linkList: Record<keyof typeof routes, string>;
+  export let user: null | Promise<User>;
+  export let logout: () => void;
 
   let showProfilePic = true;
   let namespaceSelectorOpen: boolean | null = null;
+
   function fixImage() {
     showProfilePic = false;
   }
@@ -46,10 +51,6 @@
     $navOpen = !$navOpen;
   }
 </script>
-
-<svelte:head>
-  <script src="https://cdn.tailwindcss.com"></script>
-</svelte:head>
 
 <nav
   class="h-full border-r-2 border-gray-200 relative flex transition-width z-0"
@@ -74,42 +75,28 @@
             <div class="nav-icon">
               <Icon icon={faServer} scale={1.2} />
             </div>
-            <div class="nav-title namespace mt-2">{namespace}</div>
+            <div class="nav-title namespace mt-2">{activeNamespace}</div>
             <div class="inline-block mr-1 mt-2">
               <Icon icon={faSort} scale={0.9} />
             </div>
           </div>
         </NavRow>
-        {#if $lastUsedNamespace}
-          <NavRow link={`https://web.${$lastUsedNamespace}.tmprl.cloud/`}>
+        <NavRow link={linkList.workflows}>
+          <div class="nav-icon">
+            <Icon icon={faHeartbeat} scale={1.2} />
+            <!-- <NewIcon name="workflow" scale={1.2} /> -->
+          </div>
+          <div class="nav-title">Workflows</div>
+        </NavRow>
+        <IsCloudGuard {isCloud}>
+          <NavRow link={linkList.archive}>
             <div class="nav-icon">
-              <Icon icon={faHeartbeat} scale={1.2} />
-              <!-- <NewIcon name="workflow" scale={1.2} /> -->
+              <Icon icon={faRedo} scale={1.2} />
+              <!-- <NewIcon name="refresh" scale={0.8} /> -->
             </div>
-            <div class="nav-title">Workflows</div>
+            <div class="nav-title">Archive</div>
           </NavRow>
-        {/if}
-        <NavRow link={routes.schedules}>
-          <div class="nav-icon">
-            <Icon icon={faCalendarWeek} scale={1.2} />
-            <!-- <NewIcon name="calendar" scale={1.2} /> -->
-          </div>
-          <div class="nav-title">Schedules</div>
-        </NavRow>
-        <NavRow link={routes.archive}>
-          <div class="nav-icon">
-            <Icon icon={faRedo} scale={1.2} />
-            <!-- <NewIcon name="refresh" scale={0.8} /> -->
-          </div>
-          <div class="nav-title">Archive</div>
-        </NavRow>
-        <NavRow link={routes.devTools}>
-          <div class="nav-icon">
-            <Icon icon={faCode} scale={1.2} />
-            <!-- <NewIcon name="bracket" scale={1.2} /> -->
-          </div>
-          <div class="nav-title">Dev Tools</div>
-        </NavRow>
+        </IsCloudGuard>
       </ul>
     </div>
     <div class="absolute bottom-28">
@@ -124,12 +111,20 @@
             </NavRow>
           {/each}
         {/if}
+        <IsCloudGuard {isCloud}>
+          <NavRow link={linkList.settings}>
+            <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
+            <div class="nav-title">Settings</div>
+          </NavRow>
+        </IsCloudGuard>
         <NavRow>
-          <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
-          <div class="nav-title">Settings</div>
+          <div class="nav-icon" on:click={logout}>
+            <Icon icon={faArrowAltCircleRight} scale={1.2} class="nav-icon" />
+          </div>
+          <div class="nav-title"><Logout {logout} /></div>
         </NavRow>
         <NavRow>
-          {#await $user}
+          {#await user}
             <div
               class="motion-safe:animate-pulse nav-icon"
               style="margin-left:1rem"
@@ -176,13 +171,15 @@
   <Drawer
     flyin={namespaceSelectorOpen === true}
     flyout={namespaceSelectorOpen === false}
-    on:click={() => (namespaceSelectorOpen = false)}
+    onClose={() => {
+      if (namespaceSelectorOpen === true) namespaceSelectorOpen = false;
+    }}
   >
     {#if namespaceSelectorOpen}
       <NamespaceList
-        lastUsedNamespace={$lastUsedNamespace}
         {namespaceList}
-        activeNamespace={namespace}
+        {activeNamespace}
+        lastUsedNamespace={$lastUsedNamespace}
       />
     {/if}
   </Drawer>
@@ -196,7 +193,7 @@
     transition: width 0.25s linear, max-width 0.25s linear;
   }
   .nav-icon {
-    @apply w-8 h-6 ml-6 mt-2;
+    @apply w-8 h-6 ml-6 mt-2 cursor-pointer;
   }
   .nav-title {
     max-width: 200px;

@@ -1,17 +1,21 @@
 <script lang="ts">
   export let flyin: boolean;
   export let flyout: boolean;
+  export let onClose: () => void;
 
   import NewIcon from '$lib/components/icon/index.svelte';
+  import { clickOutside } from '$lib/components/outside-click';
 </script>
 
 <div
   class={`text-gray-900 bg-white h-full z-10 border-gray-200 p-5 border-r-2 transition-width w-[40vw] right-[40vw] overflow-auto absolute`}
   class:flyin
   class:flyout
+  use:clickOutside
+  on:click-outside={onClose}
 >
   <div class="relative">
-    <div class="absolute right-0 top-0 cursor-pointer" on:click>
+    <div class="absolute right-0 top-0 cursor-pointer" on:click={onClose}>
       <NewIcon name="close" color="black" />
     </div>
   </div>
