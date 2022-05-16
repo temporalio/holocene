@@ -1,7 +1,8 @@
 export const routes = {
   archive: '/archive',
-  workflows: '/workflows',
-  observability: 'observability',
+  devTools: '/dev-tools',
+  observability: '/observability',
+  settings: '/settings',
   schedules: '/schedules',
-  devTools: 'dev-tools',
+  workflows: '/workflows',
 };
