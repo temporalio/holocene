@@ -6,7 +6,7 @@
   export let width = 24;
   export let height = 24;
   export let isCloud = false;
-  export let color = '#ffffff';
+  export let color = isCloud ? '#000000' : '#ffffff';
   export let rotate = 0;
   export let scale = 1;
   export let active = false;

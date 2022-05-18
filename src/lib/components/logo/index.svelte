@@ -1,7 +1,9 @@
 <script lang="ts">
   export let width: string = '100px';
   export let height: string = '100px';
-  let stroke = 'white';
+  export let isCloud;
+
+  let stroke = isCloud ? 'black' : 'white';
 </script>
 
 <svg
