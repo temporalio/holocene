@@ -15,7 +15,7 @@
 
 <style lang="postcss">
   .nav-row {
-    @apply flex flex-row font-secondary font-medium text-sm p-2 rounded-lg items-center;
+    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center;
   }
   .nav-row:hover {
     @apply bg-white text-gray-900;
