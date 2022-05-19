@@ -28,7 +28,7 @@
 
   export let isCloud = false;
   export let extras: ExtraIcon[] | null = null;
-  export let activeNamespace = 'default';
+  export let activeNamespace: string | null | undefined = 'default';
   export let namespaceList: null | Promise<NamespaceItem[]> = null;
   export let linkList: Partial<Record<keyof typeof routes, string>>;
   export let user: null | Promise<User> = null;
@@ -208,24 +208,24 @@
     @apply bg-white text-gray-900;
   }
   .transition-width {
-    transition: width 0.25s linear, max-width 0.25s linear;
+    transition: width 0.25s linear, width 0.25s linear;
   }
   .nav-icon {
     @apply w-8 h-6 ml-6 mt-2 cursor-pointer;
   }
   .nav-title {
-    max-width: 100px;
+    width: 100px;
     overflow: hidden;
-    transition: max-width 0.25s linear;
+    transition: width 0.25s linear;
   }
   .close .nav-title {
-    max-width: 0px;
+    width: 0px;
   }
   .open .nav-title {
-    max-width: 100px;
+    width: 100px;
   }
   .open .namespace {
-    max-width: 80px;
+    width: 80px;
   }
 
   .transition-position {
