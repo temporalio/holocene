@@ -17,7 +17,6 @@
     faArrowAltCircleRight,
     faCog,
     faHeartbeat,
-    faLocationArrow,
     faRedo,
     faServer,
     faSort,
@@ -53,7 +52,7 @@
 >
   <div
     id="navWrapper"
-    class="transition-width bg-gray-900 text-white overflow-hidden z-50 pt-3 pl-1 pr-4"
+    class="transition-width bg-gray-900 text-white z-50 pt-3 pl-1 pr-4"
     class:cloud={isCloud}
     class:open={$navOpen}
     class:close={!$navOpen}
@@ -78,12 +77,25 @@
               class="cursor-pointer relative items-center flex"
               on:click={toggleNamespaceSelector}
             >
-              <Tooltip hide={$navOpen} right text="Namespaces">
+              <Tooltip
+                right
+                hide={$navOpen}
+                text={activeNamespace || 'Namespaces'}
+              >
                 <div class="nav-icon">
                   <Icon icon={faServer} scale={1.2} />
                 </div>
               </Tooltip>
-              <div class="nav-title namespace">{activeNamespace}</div>
+              <div class="nav-title namespace">
+                <Tooltip
+                  right
+                  hide={!$navOpen ||
+                    Boolean(activeNamespace && activeNamespace.length < 12)}
+                  text="Archive"
+                >
+                  {activeNamespace}
+                </Tooltip>
+              </div>
               <div class="absolute transition-position selector">
                 <Icon icon={faSort} scale={0.9} />
               </div>
@@ -116,29 +128,21 @@
           {#if extras}
             {#each extras as extra}
               <NavRow>
-                <Tooltip right hide={$navOpen} text={extra.name}>
-                  <div class="nav-icon">
-                    <svelte:component this={extra.icon} />
-                  </div>
-                </Tooltip>
+                <div class="nav-icon">
+                  <svelte:component this={extra.icon} />
+                </div>
                 <div class="nav-title">{extra.name}</div>
               </NavRow>
             {/each}
           {/if}
           <IsCloudGuard {isCloud}>
             <NavRow link={linkList.settings}>
-              <Tooltip hide={$navOpen} text="Settings">
+              <Tooltip right hide={$navOpen} text="Settings">
                 <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
               </Tooltip>
               <div class="nav-title">Settings</div>
             </NavRow>
           </IsCloudGuard>
-          <NavRow>
-            <div class="nav-icon" on:click={logout}>
-              <Icon icon={faArrowAltCircleRight} scale={1.2} class="nav-icon" />
-            </div>
-            <div class="nav-title"><Logout {logout} /></div>
-          </NavRow>
           {#await user}
             <NavRow>
               <div class="motion-safe:animate-pulse" style="margin-left:1rem">
@@ -151,7 +155,19 @@
               </div>
             </NavRow>
           {:then user}
-            {#if user.email}
+            {#if user?.email}
+              <NavRow>
+                <Tooltip right hide={$navOpen} text="Logout">
+                  <div class="nav-icon" on:click={logout}>
+                    <Icon
+                      icon={faArrowAltCircleRight}
+                      scale={1.2}
+                      class="nav-icon"
+                    />
+                  </div>
+                </Tooltip>
+                <div class="nav-title"><Logout {logout} /></div>
+              </NavRow>
               <NavRow>
                 <div class="nav-icon" style="margin-left:1rem">
                   {#if user?.picture}
@@ -227,7 +243,6 @@
   .open .namespace {
     width: 80px;
   }
-
   .transition-position {
     transition: right 0.25s ease-in;
   }
@@ -235,6 +250,6 @@
     @apply -right-4;
   }
   .close .selector {
-    @apply right-0;
+    @apply right-0 mr-1;
   }
 </style>

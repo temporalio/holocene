@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let text: string = '';
+  export let text = '';
   export let top = false;
   export let right = false;
   export let bottom = false;
@@ -32,10 +32,10 @@
     @apply left-1/2 bottom-0 -mb-1 -translate-x-1/2 translate-y-full;
   }
   .tooltip.left {
-    @apply left-0 -ml-4 -translate-x-full;
+    @apply left-0 -ml-2 -translate-x-full;
   }
   .tooltip.right {
-    @apply right-0 -mr-4 translate-x-full;
+    @apply right-0 -mr-2 translate-x-full;
   }
 
   .wrapper:hover .tooltip {

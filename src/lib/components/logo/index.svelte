@@ -1,6 +1,6 @@
 <script lang="ts">
-  export let width: string = '100px';
-  export let height: string = '100px';
+  export let width = '100px';
+  export let height = '100px';
   export let isCloud;
 
   let stroke = isCloud ? 'black' : 'white';
