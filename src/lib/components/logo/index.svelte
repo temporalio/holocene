@@ -1,9 +1,9 @@
 <script lang="ts">
   export let width = '100px';
   export let height = '100px';
-  export let isCloud;
+  export let theme: Theme;
 
-  let stroke = isCloud ? 'black' : 'white';
+  let stroke = theme === 'operator' ? 'black' : 'white';
 </script>
 
 <svg

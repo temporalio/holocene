@@ -26,6 +26,7 @@
   import type { ExtraIcon, NamespaceItem } from '$lib/global';
 
   export let isCloud = false;
+  export let theme: Theme = 'developer';
   export let extras: ExtraIcon[] | null = null;
   export let activeNamespace: string | null | undefined = 'default';
   export let namespaceList: null | Promise<NamespaceItem[]> = null;
@@ -53,19 +54,19 @@
   <div
     id="navWrapper"
     class="transition-width bg-gray-900 text-white z-50 pt-3 pl-1 pr-4"
-    class:cloud={isCloud}
+    class:operator={theme === 'operator'}
     class:open={$navOpen}
     class:close={!$navOpen}
   >
     <div class="mt-2 ml-1">
       <a href={linkList.home} class="block">
-        <Logo height="36px" width="36px" {isCloud} />
+        <Logo height="36px" width="36px" {theme} />
       </a>
     </div>
     <button class="absolute right-0 top-6" on:click={toggleNav}>
       <NewIcon
         name={$navOpen ? 'caretLeft' : 'caretRight'}
-        {isCloud}
+        {theme}
         scale={1.2}
       />
     </button>
@@ -220,7 +221,7 @@
 </nav>
 
 <style lang="postcss">
-  .cloud {
+  .operator {
     @apply bg-white text-gray-900;
   }
   .transition-width {
