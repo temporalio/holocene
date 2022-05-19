@@ -49,158 +49,156 @@
 </script>
 
 <nav
-  class="h-full border-r-2 border-gray-200 relative flex transition-width z-0"
+  class="h-screen border-r-2 border-gray-200 relative flex transition-width z-0"
 >
   <div
     id="navWrapper"
-    class="transition-width bg-gray-900 text-white z-50 pt-3 pl-1 pr-4"
+    class="transition-width bg-gray-900 text-white z-50 pt-3 pl-1 pr-4 flex flex-col justify-between"
     class:operator={theme === 'operator'}
     class:open={$navOpen}
     class:close={!$navOpen}
   >
-    <div class="mt-2 ml-1">
-      <a href={linkList.home} class="block">
-        <Logo height="36px" width="36px" {theme} />
-      </a>
+    <div>
+      <div class="mt-2 ml-1">
+        <a href={linkList.home} class="block">
+          <Logo height="36px" width="36px" {theme} />
+        </a>
+      </div>
+      <button class="absolute right-0 top-6" on:click={toggleNav}>
+        <NewIcon
+          name={$navOpen ? 'caretLeft' : 'caretRight'}
+          {theme}
+          scale={1.2}
+        />
+      </button>
     </div>
-    <button class="absolute right-0 top-6" on:click={toggleNav}>
-      <NewIcon
-        name={$navOpen ? 'caretLeft' : 'caretRight'}
-        {theme}
-        scale={1.2}
-      />
-    </button>
-    <div class="flex h-full flex-col justify-between pb-32">
-      <div class="mt-16">
-        <ul class="space-y-1">
-          <NavRow>
-            <div
-              class="cursor-pointer relative items-center flex"
-              on:click={toggleNamespaceSelector}
+    <div class="mt-16 grow">
+      <ul class="space-y-1">
+        <NavRow>
+          <div
+            class="cursor-pointer relative items-center flex"
+            on:click={toggleNamespaceSelector}
+          >
+            <Tooltip
+              right
+              hide={$navOpen}
+              text={activeNamespace || 'Namespaces'}
             >
-              <Tooltip
-                right
-                hide={$navOpen}
-                text={activeNamespace || 'Namespaces'}
-              >
-                <div class="nav-icon">
-                  <Icon icon={faServer} scale={1.2} />
-                </div>
-              </Tooltip>
-              <div class="nav-title namespace">
-                <Tooltip
-                  right
-                  hide={!$navOpen ||
-                    Boolean(activeNamespace && activeNamespace.length < 12)}
-                  text="Archive"
-                >
-                  {activeNamespace}
-                </Tooltip>
-              </div>
-              <div class="absolute transition-position selector">
-                <Icon icon={faSort} scale={0.9} />
-              </div>
-            </div>
-          </NavRow>
-          <NavRow link={linkList.workflows}>
-            <Tooltip right hide={$navOpen} text="Workflows">
               <div class="nav-icon">
-                <Icon icon={faHeartbeat} scale={1.2} />
-                <!-- <NewIcon name="workflow" scale={1.2} /> -->
+                <Icon icon={faServer} scale={1.2} />
               </div>
             </Tooltip>
-            <div class="nav-title">Workflows</div>
+            <div class="nav-title namespace">
+              <Tooltip
+                right
+                hide={!$navOpen ||
+                  Boolean(activeNamespace && activeNamespace.length < 12)}
+                text="Archive"
+              >
+                {activeNamespace}
+              </Tooltip>
+            </div>
+            <div class="absolute transition-position selector">
+              <Icon icon={faSort} scale={0.9} />
+            </div>
+          </div>
+        </NavRow>
+        <NavRow link={linkList.workflows}>
+          <Tooltip right hide={$navOpen} text="Workflows">
+            <div class="nav-icon">
+              <Icon icon={faHeartbeat} scale={1.2} />
+              <!-- <NewIcon name="workflow" scale={1.2} /> -->
+            </div>
+          </Tooltip>
+          <div class="nav-title">Workflows</div>
+        </NavRow>
+        <IsCloudGuard {isCloud}>
+          <NavRow link={linkList.archive}>
+            <Tooltip right hide={$navOpen} text="Archive">
+              <div class="nav-icon">
+                <Icon icon={faRedo} scale={1.2} />
+                <!-- <NewIcon name="refresh" scale={0.8} /> -->
+              </div>
+            </Tooltip>
+            <div class="nav-title">Archive</div>
           </NavRow>
-          <IsCloudGuard {isCloud}>
-            <NavRow link={linkList.archive}>
-              <Tooltip right hide={$navOpen} text="Archive">
-                <div class="nav-icon">
-                  <Icon icon={faRedo} scale={1.2} />
-                  <!-- <NewIcon name="refresh" scale={0.8} /> -->
-                </div>
-              </Tooltip>
-              <div class="nav-title">Archive</div>
-            </NavRow>
-          </IsCloudGuard>
-        </ul>
-      </div>
-      <div class="">
-        <ul class="space-y-1">
-          {#if extras}
-            {#each extras as extra}
-              <NavRow>
-                <div class="nav-icon">
-                  <svelte:component this={extra.icon} />
-                </div>
-                <div class="nav-title">{extra.name}</div>
-              </NavRow>
-            {/each}
-          {/if}
-          <IsCloudGuard {isCloud}>
-            <NavRow link={linkList.settings}>
-              <Tooltip right hide={$navOpen} text="Settings">
-                <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
-              </Tooltip>
-              <div class="nav-title">Settings</div>
-            </NavRow>
-          </IsCloudGuard>
-          {#await user}
+        </IsCloudGuard>
+      </ul>
+    </div>
+    <div class="grow-0">
+      <ul class="space-y-1 pb-32">
+        {#if extras}
+          {#each extras as extra}
             <NavRow>
-              <div class="motion-safe:animate-pulse" style="margin-left:1rem">
-                <div
-                  class="rounded-full bg-blueGray-200 h-full aspect-square"
-                />
+              <div class="nav-icon">
+                <svelte:component this={extra.icon} />
               </div>
-              <div class="nav-title">
-                <div class="h-2 bg-blueGray-50 rounded mt-1" />
+              <div class="nav-title">{extra.name}</div>
+            </NavRow>
+          {/each}
+        {/if}
+        <IsCloudGuard {isCloud}>
+          <NavRow link={linkList.settings}>
+            <Tooltip right hide={$navOpen} text="Settings">
+              <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
+            </Tooltip>
+            <div class="nav-title">Settings</div>
+          </NavRow>
+        </IsCloudGuard>
+        {#await user}
+          <NavRow>
+            <div class="motion-safe:animate-pulse" style="margin-left:1rem">
+              <div class="rounded-full bg-blueGray-200 h-full aspect-square" />
+            </div>
+            <div class="nav-title">
+              <div class="h-2 bg-blueGray-50 rounded mt-1" />
+            </div>
+          </NavRow>
+        {:then user}
+          {#if user?.email}
+            <NavRow>
+              <Tooltip right hide={$navOpen} text="Logout">
+                <div class="nav-icon" on:click={logout}>
+                  <Icon
+                    icon={faArrowAltCircleRight}
+                    scale={1.2}
+                    class="nav-icon"
+                  />
+                </div>
+              </Tooltip>
+              <div class="nav-title"><Logout {logout} /></div>
+            </NavRow>
+            <NavRow>
+              <div class="nav-icon" style="margin-left:1rem">
+                {#if user?.picture}
+                  <img
+                    src={user?.picture}
+                    alt={user?.profile}
+                    class="rounded-md p-1"
+                    on:error={fixImage}
+                    class:hidden={!showProfilePic}
+                  />
+                  <div
+                    class="rounded-full p-0.5 bg-blue-200 h-full aspect-square"
+                    class:hidden={showProfilePic}
+                  >
+                    {#if user?.name}
+                      <div class="text-black text-center ">
+                        {user?.name.trim().charAt(0)}
+                      </div>
+                    {/if}
+                  </div>
+                {/if}
+              </div>
+              <div class="nav-title line-clamp-1 mt-2">
+                {#if user?.name}
+                  {user?.name}
+                {/if}
               </div>
             </NavRow>
-          {:then user}
-            {#if user?.email}
-              <NavRow>
-                <Tooltip right hide={$navOpen} text="Logout">
-                  <div class="nav-icon" on:click={logout}>
-                    <Icon
-                      icon={faArrowAltCircleRight}
-                      scale={1.2}
-                      class="nav-icon"
-                    />
-                  </div>
-                </Tooltip>
-                <div class="nav-title"><Logout {logout} /></div>
-              </NavRow>
-              <NavRow>
-                <div class="nav-icon" style="margin-left:1rem">
-                  {#if user?.picture}
-                    <img
-                      src={user?.picture}
-                      alt={user?.profile}
-                      class="rounded-md p-1"
-                      on:error={fixImage}
-                      class:hidden={!showProfilePic}
-                    />
-                    <div
-                      class="rounded-full p-0.5 bg-blue-200 h-full aspect-square"
-                      class:hidden={showProfilePic}
-                    >
-                      {#if user?.name}
-                        <div class="text-black text-center ">
-                          {user?.name.trim().charAt(0)}
-                        </div>
-                      {/if}
-                    </div>
-                  {/if}
-                </div>
-                <div class="nav-title line-clamp-1 mt-2">
-                  {#if user?.name}
-                    {user?.name}
-                  {/if}
-                </div>
-              </NavRow>
-            {/if}
-          {/await}
-        </ul>
-      </div>
+          {/if}
+        {/await}
+      </ul>
     </div>
   </div>
   <Drawer
