@@ -5,8 +5,8 @@
   export let name: IconName;
   export let width = 24;
   export let height = 24;
-  export let isCloud = false;
-  export let color = isCloud ? '#000000' : '#ffffff';
+  export let theme: 'developer' | 'operator';
+  export let color = theme === 'operator' ? '#000000' : '#ffffff';
   export let rotate = 0;
   export let scale = 1;
   export let fill = 'none';

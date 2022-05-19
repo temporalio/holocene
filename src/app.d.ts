@@ -14,3 +14,5 @@ type User = {
   name: string;
   picture: string;
 };
+
+type Theme = 'operator' | 'developer';
