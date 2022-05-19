@@ -1,12 +1,12 @@
 <script lang="ts">
   export let logout: () => void;
 
-  const logoutWithAuthStore = async () => {
-    console.log('Logging out...');
-    // (await $AuthStore).logout({
-    // 	returnTo: window.location.origin
-    // });
-  };
+  // const logoutWithAuthStore = async () => {
+  //   console.log('Logging out...');
+  //   (await $AuthStore).logout({
+  //   	returnTo: window.location.origin
+  //   });
+  // };
 </script>
 
 <button on:click={logout} class={`${$$props.class}`}>

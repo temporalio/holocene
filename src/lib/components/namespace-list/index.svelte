@@ -6,14 +6,16 @@
   export let namespaceList: null | Promise<
     { namespace: string; href: string; onClick: () => void }[]
   >;
-  export let activeNamespace: string;
+  export let activeNamespace: string | undefined | null;
   export let lastUsedNamespace: string | null;
   $: searchValue = '';
 </script>
 
 <div class="prose mt-16 mb-8">
   <h2 class="text-2xl">Select a namespace</h2>
-  <p>You are currently viewing {activeNamespace}</p>
+  {#if activeNamespace}
+    <p>You are currently viewing {activeNamespace}</p>
+  {/if}
 </div>
 
 <div class="flex border rounded-full p-1 mb-5">
