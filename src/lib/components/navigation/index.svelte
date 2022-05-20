@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Icon from 'svelte-fa';
-  import NewIcon from '$lib/components/icon/index.svelte';
+  import Icon from '$lib/components/icon/index.svelte';
+  import type { User, Theme } from '$lib/global';
 
   import { navOpen } from '$lib/stores/nav-open';
   import { lastUsedNamespace } from '$lib/stores/namespaces';
@@ -9,18 +9,9 @@
   import Logo from '$lib/components/logo/index.svelte';
   import Logout from '$lib/components/logout/index.svelte';
   import NamespaceList from '$lib/components/namespace-list/index.svelte';
-  import Drawer from '$lib/components/navigation/drawer.svelte';
+  import Drawer from '$lib/components/navigation/_drawer.svelte';
   import Tooltip from '$lib/components/tooltip/index.svelte';
   import IsCloudGuard from '$lib/components/guard/is-cloud-guard.svelte';
-
-  import {
-    faArrowAltCircleRight,
-    faCog,
-    faHeartbeat,
-    faRedo,
-    faServer,
-    faSort,
-  } from '@fortawesome/free-solid-svg-icons';
 
   import type { routes } from '$lib/routes';
   import type { ExtraIcon, NamespaceItem } from '$lib/global';
@@ -64,8 +55,12 @@
           <Logo height="36px" width="36px" {theme} />
         </a>
       </div>
-      <button class="absolute right-0 top-6" on:click={toggleNav}>
-        <NewIcon
+      <button
+        class="absolute"
+        style="top: 25px; right: -2px;"
+        on:click={toggleNav}
+      >
+        <Icon
           name={$navOpen ? 'caretLeft' : 'caretRight'}
           {theme}
           scale={1.2}
@@ -74,7 +69,7 @@
     </div>
     <div class="mt-16 grow">
       <ul class="space-y-1">
-        <NavRow>
+        <NavRow {theme}>
           <div
             class="cursor-pointer relative items-center flex"
             on:click={toggleNamespaceSelector}
@@ -85,7 +80,7 @@
               text={activeNamespace || 'Namespaces'}
             >
               <div class="nav-icon">
-                <Icon icon={faServer} scale={1.2} />
+                <Icon {theme} name="namespaceSelect" scale={1.2} />
               </div>
             </Tooltip>
             <div class="nav-title namespace">
@@ -98,26 +93,21 @@
                 {activeNamespace}
               </Tooltip>
             </div>
-            <div class="absolute transition-position selector">
-              <Icon icon={faSort} scale={0.9} />
-            </div>
           </div>
         </NavRow>
-        <NavRow link={linkList.workflows}>
+        <NavRow link={linkList.workflows} {theme}>
           <Tooltip right hide={$navOpen} text="Workflows">
             <div class="nav-icon">
-              <Icon icon={faHeartbeat} scale={1.2} />
-              <!-- <NewIcon name="workflow" scale={1.2} /> -->
+              <Icon {theme} name="workflow" scale={1} />
             </div>
           </Tooltip>
           <div class="nav-title">Workflows</div>
         </NavRow>
         <IsCloudGuard {isCloud}>
-          <NavRow link={linkList.archive}>
+          <NavRow link={linkList.archive} {theme}>
             <Tooltip right hide={$navOpen} text="Archive">
               <div class="nav-icon">
-                <Icon icon={faRedo} scale={1.2} />
-                <!-- <NewIcon name="refresh" scale={0.8} /> -->
+                <Icon {theme} name="archive" scale={1} />
               </div>
             </Tooltip>
             <div class="nav-title">Archive</div>
@@ -129,7 +119,7 @@
       <ul class="space-y-1 pb-32">
         {#if extras}
           {#each extras as extra}
-            <NavRow>
+            <NavRow {theme}>
               <div class="nav-icon">
                 <svelte:component this={extra.icon} />
               </div>
@@ -138,15 +128,17 @@
           {/each}
         {/if}
         <IsCloudGuard {isCloud}>
-          <NavRow link={linkList.settings}>
+          <NavRow link={linkList.settings} {theme}>
             <Tooltip right hide={$navOpen} text="Settings">
-              <div class="nav-icon"><Icon icon={faCog} scale={1.2} /></div>
+              <div class="nav-icon">
+                <Icon {theme} name="settings" scale={1} />
+              </div>
             </Tooltip>
             <div class="nav-title">Settings</div>
           </NavRow>
         </IsCloudGuard>
         {#await user}
-          <NavRow>
+          <NavRow {theme}>
             <div class="motion-safe:animate-pulse" style="margin-left:1rem">
               <div class="rounded-full bg-blueGray-200 h-full aspect-square" />
             </div>
@@ -156,25 +148,21 @@
           </NavRow>
         {:then user}
           {#if user?.email}
-            <NavRow>
+            <NavRow {theme}>
               <Tooltip right hide={$navOpen} text="Logout">
                 <div class="nav-icon" on:click={logout}>
-                  <Icon
-                    icon={faArrowAltCircleRight}
-                    scale={1.2}
-                    class="nav-icon"
-                  />
+                  <Icon {theme} name="logout" scale={1} />
                 </div>
               </Tooltip>
               <div class="nav-title"><Logout {logout} /></div>
             </NavRow>
-            <NavRow>
-              <div class="nav-icon" style="margin-left:1rem">
+            <div class="profile-row">
+              <div>
                 {#if user?.picture}
                   <img
                     src={user?.picture}
                     alt={user?.profile}
-                    class="rounded-md p-1"
+                    class="rounded-md p-1 w-8 h-8"
                     on:error={fixImage}
                     class:hidden={!showProfilePic}
                   />
@@ -195,7 +183,7 @@
                   {user?.name}
                 {/if}
               </div>
-            </NavRow>
+            </div>
           {/if}
         {/await}
       </ul>
@@ -226,7 +214,7 @@
     transition: width 0.25s linear, width 0.25s linear;
   }
   .nav-icon {
-    @apply w-8 h-6 ml-6 mt-2 cursor-pointer;
+    @apply h-6 ml-2 mr-2 mt-0 cursor-pointer;
   }
   .nav-title {
     width: 100px;
@@ -242,13 +230,7 @@
   .open .namespace {
     width: 80px;
   }
-  .transition-position {
-    transition: right 0.25s ease-in;
-  }
-  .open .selector {
-    @apply -right-4;
-  }
-  .close .selector {
-    @apply right-0 mr-1;
+  .profile-row {
+    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center;
   }
 </style>

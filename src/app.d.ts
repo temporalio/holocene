@@ -8,11 +8,3 @@ declare namespace App {
   // interface Session {}
   // interface Stuff {}
 }
-
-type User = {
-  email: string;
-  name: string;
-  picture: string;
-};
-
-type Theme = 'operator' | 'developer';
