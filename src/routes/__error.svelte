@@ -11,7 +11,7 @@
 </script>
 
 <script>
-  export let err: string;
+  export let err;
 </script>
 
 {err}

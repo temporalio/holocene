@@ -3,7 +3,7 @@
   export let flyout: boolean;
   export let onClose: () => void;
 
-  import NewIcon from '$lib/components/icon/index.svelte';
+  import Icon from '$lib/components/icon/index.svelte';
   import { clickOutside } from '$lib/components/outside-click';
 </script>
 
@@ -16,7 +16,7 @@
 >
   <div class="relative">
     <div class="absolute right-0 top-0 cursor-pointer" on:click={onClose}>
-      <NewIcon name="close" color="black" />
+      <Icon name="close" color="black" />
     </div>
   </div>
   <slot />

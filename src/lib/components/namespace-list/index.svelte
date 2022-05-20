@@ -1,8 +1,6 @@
 <script lang="ts">
-  import NewIcon from '$lib/components/icon/index.svelte';
-  import Icon from 'svelte-fa';
+  import Icon from '$lib/components/icon/index.svelte';
 
-  import { faSearch } from '@fortawesome/free-solid-svg-icons';
   export let namespaceList: null | Promise<
     { namespace: string; href: string; onClick: () => void }[]
   >;
@@ -20,7 +18,7 @@
 
 <div class="flex border rounded-full p-1 mb-5">
   <div class="mt-1 ml-4 mr-2">
-    <Icon icon={faSearch} scale={1} />
+    <Icon name="search" scale={1} color="#18181b" />
   </div>
   <input class="w-full" placeholder="Search" bind:value={searchValue} />
 </div>
@@ -36,7 +34,7 @@
         >
           <div class="w-4 h-4">
             {#if namespace.namespace === activeNamespace}
-              <NewIcon name="check" color="#1d4ed8" />
+              <Icon name="check" color="#1d4ed8" />
             {/if}
           </div>
           <a

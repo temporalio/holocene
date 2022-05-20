@@ -1,12 +1,14 @@
 <script lang="ts">
+  import type { Theme } from '$lib/global';
+
   import { iconPaths } from './paths';
   import type { IconName } from './paths';
 
   export let name: IconName;
   export let width = 24;
   export let height = 24;
-  export let theme: 'developer' | 'operator';
-  export let color = theme === 'operator' ? '#000000' : '#ffffff';
+  export let theme: Theme = 'developer';
+  export let color = theme === 'operator' ? '#18181b' : '#ffffff';
   export let rotate = 0;
   export let scale = 1;
   export let fill = 'none';
@@ -28,7 +30,7 @@
       <path
         d={path}
         stroke={color}
-        stroke-width="1.5"
+        stroke-width="1"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
