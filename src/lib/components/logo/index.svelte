@@ -1,11 +1,9 @@
 <script lang="ts">
-  import type { Theme } from '$lib/global';
-
   export let width = '100px';
   export let height = '100px';
-  export let theme: Theme;
+  export let isCloud: boolean;
 
-  let stroke = theme === 'operator' ? 'black' : 'white';
+  let stroke = isCloud ? 'black' : 'white';
 </script>
 
 <svg

@@ -1,11 +1,7 @@
 <script lang="ts">
-  import type { Theme } from '$lib/global';
-
   export let link: string | null = null;
-  export let theme: Theme;
-  let classes = `nav-row ${$$props.class} ${
-    theme === 'operator' ? 'operator' : 'developer'
-  }`;
+  export let isCloud: boolean;
+  let classes = `nav-row ${$$props.class} ${isCloud ? 'cloud' : 'local'}`;
 </script>
 
 <li class={link ? '' : classes}>
@@ -20,24 +16,24 @@
 
 <style lang="postcss">
   .nav-row {
-    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center;
+    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center truncate;
   }
-  .developer {
+  .local {
     @apply text-white;
   }
-  .operator {
+  .cloud {
     @apply text-gray-900;
   }
-  .developer:hover {
+  .local:hover {
     @apply bg-white text-gray-900;
   }
-  .operator:hover {
+  .cloud:hover {
     @apply bg-gray-900 text-white;
   }
-  .developer:hover :global(svg path) {
+  .local:hover :global(svg path) {
     stroke: #18181b;
   }
-  .operator:hover :global(svg path) {
+  .cloud:hover :global(svg path) {
     stroke: #ffffff;
   }
 </style>

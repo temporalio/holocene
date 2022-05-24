@@ -27,5 +27,3 @@ type User = {
 type ExtraIcon = { icon: typeof SvelteComponent; name: string };
 
 type NamespaceItem = { namespace: string; href: string; onClick: () => void };
-
-type Theme = 'operator' | 'developer';

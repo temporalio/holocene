@@ -1,10 +1,13 @@
 {
   "name": "holocene",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "scripts": {
     "dev": "svelte-kit dev --port 3001",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
+    "package:patch": "npm version patch && svelte-kit package",
+    "package:minor": "npm version minor && svelte-kit package",
+    "package:major": "npm version major && svelte-kit package",
     "preview": "svelte-kit preview",
     "prepare": "svelte-kit sync",
     "test": "playwright test",
