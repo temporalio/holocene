@@ -18,12 +18,12 @@
   import { afterNavigate } from '$app/navigation';
 
   export let isCloud = false;
-  export let extras: ExtraIcon[] | null = null;
   export let activeNamespace: string | null | undefined = 'default';
   export let namespaceList: null | Promise<NamespaceItem[]> = null;
   export let linkList: Partial<Record<keyof typeof routes, string>>;
   export let user: null | Promise<User> = null;
   export let logout: () => void;
+  export let extras: ExtraIcon[] | null = null;
 
   let showProfilePic = true;
   let namespaceSelectorOpen: boolean | null = null;
@@ -49,6 +49,7 @@
 
 <nav
   class="h-screen border-r-2 border-gray-200 relative flex transition-width z-0"
+  data-cy="navigation-header"
 >
   <div
     id="navWrapper"
@@ -192,6 +193,14 @@
             </div>
           {/if}
         {/await}
+        <NavRow link={linkList.feedback} {isCloud} externalLink>
+          <Tooltip right hide={$navOpen} text="Feedback">
+            <div class="nav-icon">
+              <Icon {isCloud} name="heart" scale={1} />
+            </div>
+          </Tooltip>
+          <div class="nav-title">Feedback</div>
+        </NavRow>
       </ul>
     </div>
   </div>

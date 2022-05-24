@@ -1,11 +1,16 @@
 <script lang="ts">
   export let link: string | null = null;
   export let isCloud: boolean;
+  export let externalLink = false;
   let classes = `nav-row ${$$props.class} ${isCloud ? 'cloud' : 'local'}`;
 </script>
 
 <li class={link ? '' : classes}>
-  {#if link}
+  {#if link && externalLink}
+    <a href={link} target="_blank" class={classes}>
+      <slot />
+    </a>
+  {:else if link}
     <a href={link} class={classes}>
       <slot />
     </a>
@@ -16,7 +21,7 @@
 
 <style lang="postcss">
   .nav-row {
-    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center truncate;
+    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center;
   }
   .local {
     @apply text-white;
