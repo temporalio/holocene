@@ -24,7 +24,6 @@
   export let user: null | Promise<User> = null;
   export let logout: () => void;
   export let extras: ExtraIcon[] | null = null;
-  export let feedbackUrl: string;
 
   let showProfilePic = true;
   let namespaceSelectorOpen: boolean | null = null;
@@ -194,7 +193,7 @@
             </div>
           {/if}
         {/await}
-        <NavRow {isCloud}>
+        <NavRow link={linkList.feedback} {isCloud} externalLink>
           <Tooltip right hide={$navOpen} text="Feedback">
             <div class="nav-icon">
               <Icon {isCloud} name="heart" scale={1} />

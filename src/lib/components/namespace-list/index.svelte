@@ -58,7 +58,7 @@
 
 <style lang="postcss">
   .link {
-    @apply ml-2 text-gray-900;
+    @apply ml-2 text-gray-900 truncate;
   }
 
   .link:hover {
