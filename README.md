@@ -25,7 +25,7 @@ cd ..
 npm run package -- --watch
 ```
 
-In ui or cloud-ui
+In ui
 
 ```bash
 npm link holocene
