@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class={`text-gray-900 bg-white h-full z-10 border-gray-200 p-5 border-r-2 transition-width w-[40vw] right-[40vw] overflow-auto absolute`}
+  class={`text-gray-900 bg-white h-full z-10 border-gray-200 p-5 border-r-2 transition-width w-[350px] right-[300px] overflow-auto absolute`}
   class:flyin
   class:flyout
   use:clickOutside
@@ -30,13 +30,13 @@
         0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
     100% {
-      right: -40vw;
+      right: -350px;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     }
   }
   @keyframes flyout {
     0% {
-      right: -40vw;
+      right: -350px;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     }
     100% {

@@ -6,6 +6,7 @@
   >;
   export let activeNamespace: string | undefined | null;
   export let lastUsedNamespace: string | null;
+
   $: searchValue = '';
 </script>
 
@@ -30,25 +31,22 @@
     {#if namespacesResult}
       {#each namespacesResult.filter( ({ namespace }) => namespace.includes(searchValue), ) as namespace}
         <li
-          class="first:rounded-t-md first:border-t last:rounded-b-md border-b border-l border-r p-3 flex border-collapse gap-2"
+          class="first:rounded-t-md first:border-t last:rounded-b-md border-b border-l border-r p-3 flex border-collapse gap-2 hover:bg-gray-50 cursor-pointer"
+          on:click={() => {
+            namespace.onClick();
+            lastUsedNamespace = namespace.namespace;
+          }}
         >
           <div class="w-4 h-4">
             {#if namespace.namespace === activeNamespace}
-              <Icon name="check" color="#1d4ed8" />
+              <Icon name="check" color="#1d4ed8" scale={1.2} />
             {/if}
           </div>
           <a
             href={namespace.href}
-            class={`underline ml-2 ${
-              activeNamespace === namespace.namespace
-                ? 'text-blue-700'
-                : 'text-blue-400'
-            } `}
-            class:active={namespace.namespace === activeNamespace}
-            on:click={() => {
-              namespace.onClick();
-              lastUsedNamespace = namespace.namespace;
-            }}>{namespace.namespace}</a
+            class="link"
+            class:active={activeNamespace === namespace.namespace}
+            >{namespace.namespace}</a
           >
         </li>
       {/each}
@@ -57,3 +55,16 @@
     {/if}
   {/await}
 </ul>
+
+<style lang="postcss">
+  .link {
+    @apply ml-2 text-gray-900;
+  }
+
+  .link:hover {
+    @apply underline;
+  }
+  .active {
+    @apply text-blue-700;
+  }
+</style>

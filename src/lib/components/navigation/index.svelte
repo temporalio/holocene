@@ -15,6 +15,7 @@
 
   import type { routes } from '$lib/routes';
   import type { ExtraIcon, NamespaceItem } from '$lib/global';
+  import { afterNavigate } from '$app/navigation';
 
   export let isCloud = false;
   export let theme: Theme = 'developer';
@@ -32,11 +33,18 @@
     showProfilePic = false;
   }
   function toggleNamespaceSelector() {
+    console.log('on toggle');
     namespaceSelectorOpen = !namespaceSelectorOpen;
   }
   function toggleNav() {
     $navOpen = !$navOpen;
   }
+
+  afterNavigate(() => {
+    if (namespaceSelectorOpen) {
+      namespaceSelectorOpen = false;
+    }
+  });
 </script>
 
 <nav
@@ -52,22 +60,18 @@
     <div>
       <div class="mt-2 ml-1">
         <a href={linkList.home} class="block">
-          <Logo height="36px" width="36px" {theme} />
+          <Logo height="24px" width="24px" {theme} />
         </a>
       </div>
       <button
         class="absolute"
-        style="top: 25px; right: -2px;"
+        style="top: 19px; right: -2px;"
         on:click={toggleNav}
       >
-        <Icon
-          name={$navOpen ? 'caretLeft' : 'caretRight'}
-          {theme}
-          scale={1.2}
-        />
+        <Icon name={$navOpen ? 'caretLeft' : 'caretRight'} {theme} scale={1} />
       </button>
     </div>
-    <div class="mt-16 grow">
+    <div class="mt-16 grow items-center">
       <ul class="space-y-1">
         <NavRow {theme}>
           <div
@@ -77,7 +81,7 @@
             <Tooltip
               right
               hide={$navOpen}
-              text={activeNamespace || 'Namespaces'}
+              text={activeNamespace ?? 'Namespaces'}
             >
               <div class="nav-icon">
                 <Icon {theme} name="namespaceSelect" scale={1.2} />
@@ -193,6 +197,7 @@
     flyin={namespaceSelectorOpen === true}
     flyout={namespaceSelectorOpen === false}
     onClose={() => {
+      console.log('on drawer close');
       if (namespaceSelectorOpen === true) namespaceSelectorOpen = false;
     }}
   >
@@ -231,6 +236,6 @@
     width: 80px;
   }
   .profile-row {
-    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center;
+    @apply flex flex-row font-secondary font-medium text-sm py-1 ml-1 rounded-lg items-center;
   }
 </style>
