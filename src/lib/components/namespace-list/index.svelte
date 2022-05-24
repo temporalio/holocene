@@ -17,7 +17,7 @@
   {/if}
 </div>
 
-<div class="flex border rounded-full p-1 mb-5">
+<div class="flex border rounded-full p-1 pr-4 mb-5">
   <div class="mt-1 ml-4 mr-2">
     <Icon name="search" scale={1} color="#18181b" />
   </div>

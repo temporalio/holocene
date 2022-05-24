@@ -1,14 +1,12 @@
 <script lang="ts">
-  import type { Theme } from '$lib/global';
-
   import { iconPaths } from './paths';
   import type { IconName } from './paths';
 
   export let name: IconName;
   export let width = 24;
   export let height = 24;
-  export let theme: Theme = 'developer';
-  export let color = theme === 'operator' ? '#18181b' : '#ffffff';
+  export let isCloud: boolean | undefined = undefined;
+  export let color = isCloud === false ? '#ffffff' : '#18181b';
   export let rotate = 0;
   export let scale = 1;
   export let fill = 'none';

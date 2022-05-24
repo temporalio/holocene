@@ -1,6 +1,5 @@
 <script lang="ts">
   import Icon from '$lib/components/icon/index.svelte';
-  import type { Theme } from '$lib/global';
 
   import { navOpen } from '$lib/stores/nav-open';
 
@@ -10,7 +9,7 @@
 
   import type { routes } from '$lib/routes';
 
-  export let theme: Theme = 'developer';
+  export let isCloud: boolean;
   export let linkList: Partial<Record<keyof typeof routes, string>>;
 
   function toggleNav() {
@@ -24,14 +23,14 @@
   <div
     id="navWrapper"
     class="transition-width bg-gray-900 text-white z-50 pt-3 pl-1 pr-4 flex flex-col justify-between"
-    class:operator={theme === 'operator'}
+    class:cloud={isCloud}
     class:open={$navOpen}
     class:close={!$navOpen}
   >
     <div>
       <div class="mt-2 ml-1">
         <a href={linkList.home} class="block">
-          <Logo height="36px" width="36px" {theme} />
+          <Logo height="36px" width="36px" {isCloud} />
         </a>
       </div>
       <button
@@ -41,17 +40,17 @@
       >
         <Icon
           name={$navOpen ? 'caretLeft' : 'caretRight'}
-          {theme}
+          {isCloud}
           scale={1.2}
         />
       </button>
     </div>
     <div class="mt-16 grow">
       <ul class="space-y-1">
-        <NavRow link={linkList.import} {theme}>
+        <NavRow link={linkList.import} {isCloud}>
           <Tooltip right hide={$navOpen} text="Workflows">
             <div class="nav-icon">
-              <Icon {theme} name="download" scale={1} />
+              <Icon {isCloud} name="download" scale={1} />
             </div>
           </Tooltip>
           <div class="nav-title">Import</div>
@@ -65,7 +64,7 @@
 </nav>
 
 <style lang="postcss">
-  .operator {
+  .cloud {
     @apply bg-white text-gray-900;
   }
   .transition-width {
