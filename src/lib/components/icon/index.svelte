@@ -1,16 +1,15 @@
 <script lang="ts">
-  import { iconPaths } from './paths';
+  import { icons } from './paths';
   import type { IconName } from './paths';
 
   export let name: IconName;
   export let width = 24;
   export let height = 24;
-  export let isCloud: boolean | undefined = undefined;
-  export let color = isCloud === false ? '#ffffff' : '#18181b';
   export let rotate = 0;
   export let scale = 1;
+  export let color = '';
 
-  $: icon = iconPaths[name] ?? iconPaths['namespaceSelect'];
+  $: icon = icons[name];
 </script>
 
 {#if icon}
@@ -24,7 +23,11 @@
     style="transform: rotate({rotate}deg) scale({scale});"
   >
     {#each icon.paths as path}
-      <path {...path} />
+      <path
+        {...path}
+        stroke={color !== '' ? color : path?.stroke ?? ''}
+        fill={color !== '' ? color : path?.fill ?? ''}
+      />
     {/each}
   </svg>
 {/if}

@@ -1,11 +1,13 @@
 <script lang="ts">
   export let link: string | null = null;
   export let isCloud: boolean;
+  export let noFilter = false;
+  export let wrap = false;
   export let externalLink = false;
   let classes = `nav-row ${$$props.class} ${isCloud ? 'cloud' : 'local'}`;
 </script>
 
-<li class={link ? '' : classes}>
+<li class={link ? '' : classes} class:noFilter class:wrap>
   {#if link && externalLink}
     <a href={link} target="_blank" class={classes}>
       <slot />
@@ -21,7 +23,10 @@
 
 <style lang="postcss">
   .nav-row {
-    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center;
+    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center whitespace-nowrap;
+  }
+  .wrap {
+    @apply whitespace-normal;
   }
   .local {
     @apply text-white;
@@ -35,14 +40,24 @@
   .cloud:hover {
     @apply bg-gray-900 text-white;
   }
-  .local :global(svg path) {
+  .local :global(svg) {
     filter: invert(100%);
+    -webkit-filter: invert(100%);
   }
-  .local:hover :global(svg path) {
+  .local:hover :global(svg) {
     filter: invert(0);
+    -webkit-filter: invert(0%);
   }
-
-  .cloud:hover :global(svg path) {
+  .cloud:hover :global(svg) {
     filter: invert(100%);
+    -webkit-filter: invert(100%);
+  }
+  .noFilter :global(svg) {
+    filter: invert(0%);
+    -webkit-filter: invert(0%);
+  }
+  .noFilter:hover :global(svg) {
+    filter: invert(0%);
+    -webkit-filter: invert(0%);
   }
 </style>
