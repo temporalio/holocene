@@ -7,7 +7,12 @@
   let classes = `nav-row ${$$props.class} ${isCloud ? 'cloud' : 'local'}`;
 </script>
 
-<li class={link ? '' : classes} class:noFilter class:wrap>
+<li
+  class={link ? '' : classes}
+  class:noFilter
+  class:wrap
+  data-cy={$$props['data-cy']}
+>
   {#if link && externalLink}
     <a href={link} target="_blank" class={classes}>
       <slot />
