@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Navigation from '$lib/components/navigation/index.svelte';
+  import Navigation from '$lib/components/navigation/full-nav.svelte';
   import { routes } from '$lib/routes';
   import { noop } from 'svelte/internal';
   import '../app.css';

@@ -18,8 +18,8 @@
 </div>
 
 <div class="flex border rounded-full p-1 pr-4 mb-5">
-  <div class="mt-1 ml-4 mr-2">
-    <Icon name="search" scale={1} color="#18181b" />
+  <div class="ml-4 mr-2">
+    <Icon name="search" scale={1} />
   </div>
   <input class="w-full" placeholder="Search" bind:value={searchValue} />
 </div>
@@ -37,9 +37,9 @@
             lastUsedNamespace = namespace.namespace;
           }}
         >
-          <div class="w-4 h-4">
+          <div class="w-6 h-6 pl-3" style="padding-top: 6px;">
             {#if namespace.namespace === activeNamespace}
-              <Icon name="check" color="#1d4ed8" scale={1.2} />
+              <Icon name="checkMark" scale={1.2} />
             {/if}
           </div>
           <a

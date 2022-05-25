@@ -1,7 +1,6 @@
 <script lang="ts">
   export let flyin: boolean;
   export let flyout: boolean;
-  export let isCloud: boolean;
   export let onClose: () => void;
 
   import Icon from '$lib/components/icon/index.svelte';
@@ -17,7 +16,7 @@
 >
   <div class="relative">
     <div class="absolute right-0 top-0 cursor-pointer" on:click={onClose}>
-      <Icon {isCloud} name="close" color="black" />
+      <Icon name="close" scale={1} />
     </div>
   </div>
   <slot />

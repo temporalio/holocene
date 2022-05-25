@@ -1,17 +1,17 @@
 <script context="module" lang="ts">
-  import type { ErrorLoad, Load } from '@sveltejs/kit';
+  import type { Load } from '@sveltejs/kit';
 
-  export const load: ErrorLoad = async function ({ url, fetch, error }) {
+  export const load: Load = async function ({ error }) {
     return {
       props: {
-        err: `${status}: ${error?.message}`,
+        error: `${error?.message ?? ''}`,
       },
     };
   };
 </script>
 
 <script>
-  export let err;
+  export let error = '';
 </script>
 
-{err}
+{error}

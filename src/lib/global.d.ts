@@ -24,6 +24,6 @@ type User = {
   [key: string]: any;
 };
 
-type ExtraIcon = { icon: typeof SvelteComponent; name: string };
+type ExtraIcon = { component: typeof SvelteComponent; name: string };
 
 type NamespaceItem = { namespace: string; href: string; onClick: () => void };
