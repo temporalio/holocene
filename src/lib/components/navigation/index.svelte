@@ -72,7 +72,13 @@
       style="top: 22px; right: -2px;"
       on:click={toggleNav}
     >
-      <Icon name={$navOpen ? 'caretLeft' : 'caretRight'} {isCloud} scale={1} />
+      <div>
+        <Icon
+          name={$navOpen ? 'caretLeft' : 'caretRight'}
+          {isCloud}
+          scale={1}
+        />
+      </div>
     </button>
     <div class="mt-16 grow items-center">
       <ul class="space-y-1">
@@ -87,7 +93,7 @@
               text={activeNamespace ?? 'Namespaces'}
             >
               <div class="nav-icon">
-                <Icon {isCloud} name="namespaceSelect" scale={1.2} />
+                <Icon {isCloud} name="namespaceSelect" scale={1.8} />
               </div>
             </Tooltip>
             <div class="nav-title namespace">
@@ -105,7 +111,7 @@
         <NavRow link={linkList.workflows} {isCloud}>
           <Tooltip right hide={$navOpen} text="Workflows">
             <div class="nav-icon">
-              <Icon {isCloud} name="workflow" scale={1} />
+              <Icon {isCloud} name="workflow" scale={1.5} />
             </div>
           </Tooltip>
           <div class="nav-title">Workflows</div>
@@ -114,7 +120,7 @@
           <NavRow link={linkList.archive} {isCloud}>
             <Tooltip right hide={$navOpen} text="Archive">
               <div class="nav-icon">
-                <Icon {isCloud} name="archive" scale={1} />
+                <Icon {isCloud} name="archive" scale={1.3} />
               </div>
             </Tooltip>
             <div class="nav-title">Archive</div>
@@ -138,7 +144,7 @@
           <NavRow link={linkList.settings} {isCloud}>
             <Tooltip right hide={$navOpen} text="Settings">
               <div class="nav-icon">
-                <Icon {isCloud} name="settings" scale={1} />
+                <Icon {isCloud} name="settings" scale={1.4} />
               </div>
             </Tooltip>
             <div class="nav-title">Settings</div>
@@ -196,7 +202,7 @@
         <NavRow link={linkList.feedback} {isCloud} externalLink>
           <Tooltip right hide={$navOpen} text="Feedback">
             <div class="nav-icon">
-              <Icon {isCloud} name="heart" scale={1} />
+              <Icon {isCloud} name="feedback" scale={1.4} />
             </div>
           </Tooltip>
           <div class="nav-title">Feedback</div>

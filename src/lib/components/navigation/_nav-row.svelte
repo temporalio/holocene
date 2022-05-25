@@ -35,10 +35,14 @@
   .cloud:hover {
     @apply bg-gray-900 text-white;
   }
-  .local:hover :global(svg path) {
-    stroke: #18181b;
+  .local :global(svg path) {
+    filter: invert(100%);
   }
+  .local:hover :global(svg path) {
+    filter: invert(0);
+  }
+
   .cloud:hover :global(svg path) {
-    stroke: #ffffff;
+    filter: invert(100%);
   }
 </style>

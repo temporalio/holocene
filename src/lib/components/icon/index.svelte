@@ -9,29 +9,22 @@
   export let color = isCloud === false ? '#ffffff' : '#18181b';
   export let rotate = 0;
   export let scale = 1;
-  export let fill = 'none';
 
-  $: paths = iconPaths[name];
+  $: icon = iconPaths[name] ?? iconPaths['namespaceSelect'];
 </script>
 
-{#if paths}
+{#if icon}
   <svg
     {width}
     {height}
+    fill="none"
     class={$$props.class}
-    {fill}
     viewBox="0 0 {width} {height}"
     xmlns="http://www.w3.org/2000/svg"
     style="transform: rotate({rotate}deg) scale({scale});"
   >
-    {#each paths as path}
-      <path
-        d={path}
-        stroke={color}
-        stroke-width="1"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+    {#each icon.paths as path}
+      <path {...path} />
     {/each}
   </svg>
 {/if}
