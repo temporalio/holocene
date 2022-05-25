@@ -45,7 +45,7 @@
 
 <NavContainer {isCloud} {linkList}>
   <svelte:fragment slot="top">
-    <NavRow {isCloud} wrap>
+    <NavRow {isCloud} wrap data-cy="namespace-select-button">
       <div
         class="cursor-pointer relative items-center flex"
         on:click={toggleNamespaceSelector}
@@ -60,7 +60,7 @@
         </div>
       </div>
     </NavRow>
-    <NavRow link={linkList.workflows} {isCloud}>
+    <NavRow link={linkList.workflows} {isCloud} data-cy="worfklows-button">
       <Tooltip right hide={$navOpen} text="Workflows">
         <div class="nav-icon">
           <Icon name="workflow" scale={1.5} />
@@ -69,7 +69,7 @@
       <div class="nav-title">Workflows</div>
     </NavRow>
     <IsCloudGuard {isCloud}>
-      <NavRow link={linkList.archive} {isCloud}>
+      <NavRow link={linkList.archive} {isCloud} data-cy="archive-button">
         <Tooltip right hide={$navOpen} text="Archive">
           <div class="nav-icon">
             <Icon name="archive" scale={1.2} />
@@ -93,7 +93,7 @@
       {/each}
     {/if}
     <IsCloudGuard {isCloud}>
-      <NavRow link={linkList.settings} {isCloud}>
+      <NavRow link={linkList.settings} {isCloud} data-cy="settings-button">
         <Tooltip right hide={$navOpen} text="Settings">
           <div class="nav-icon">
             <Icon name="settings" scale={1.4} />

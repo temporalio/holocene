@@ -24,7 +24,7 @@
   <input class="w-full" placeholder="Search" bind:value={searchValue} />
 </div>
 
-<ul>
+<ul data-cy="namespace-list">
   {#await namespaceList}
     Loading ...
   {:then namespacesResult}
