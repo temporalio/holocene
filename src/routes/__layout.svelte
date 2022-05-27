@@ -5,9 +5,9 @@
   import '../app.css';
 </script>
 
-<div class="flex flex-row w-screen h-screen">
+<div class="flex h-screen w-screen flex-row">
   <div class="sticky top-0 h-screen bg-white">
     <Navigation linkList={routes} logout={noop} />
   </div>
-  <div class="flex-auto h-screen w-max overflow-auto"><slot /></div>
+  <div class="h-screen w-max flex-auto overflow-auto"><slot /></div>
 </div>

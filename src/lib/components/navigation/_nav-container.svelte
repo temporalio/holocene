@@ -25,7 +25,7 @@
     <div>
       <a
         href={linkList.home}
-        class="block absolute"
+        class="absolute block"
         style="top: 22px; left: 18px;"
       >
         <Logo height="24px" width="24px" {isCloud} />
@@ -56,11 +56,11 @@
 
 <style lang="postcss">
   .nav-header {
-    @apply h-screen border-r-2 border-gray-200 relative flex z-0;
+    @apply relative z-0 flex h-screen border-r-2 border-gray-200;
   }
 
   .nav-wrapper {
-    @apply bg-gray-900 text-white z-50 pt-3 px-3 flex flex-col justify-between items-center;
+    @apply z-50 flex flex-col items-center justify-between bg-gray-900 px-3 pt-3 text-white;
   }
 
   .cloud {
@@ -82,7 +82,7 @@
   }
 
   .nav-toggle {
-    @apply absolute invisible;
+    @apply invisible absolute;
   }
 
   .nav-header:hover .nav-toggle {

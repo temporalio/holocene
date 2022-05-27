@@ -17,7 +17,7 @@
   {/if}
 </div>
 
-<div class="flex border rounded-full p-1 pr-4 mb-5">
+<div class="mb-5 flex rounded-full border p-1 pr-4">
   <div class="ml-4 mr-2">
     <Icon name="search" scale={1} />
   </div>
@@ -58,7 +58,7 @@
 
 <style lang="postcss">
   .link {
-    @apply ml-2 text-gray-900 truncate;
+    @apply ml-2 truncate text-gray-900;
   }
 
   .link:hover {

@@ -28,7 +28,7 @@
 
 <style lang="postcss">
   .nav-icon {
-    @apply h-6 ml-2 mr-2 mt-0 cursor-pointer;
+    @apply ml-2 mr-2 mt-0 h-6 cursor-pointer;
   }
   .nav-title {
     width: 100px;

@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class={`text-gray-900 bg-white h-full z-10 border-gray-200 p-5 border-r-2 transition-width w-[300px] right-[300px] md:w-[500px] md:right-[500px] overflow-auto absolute`}
+  class={`transition-width absolute right-[300px] z-10 h-full w-[300px] overflow-auto border-r-2 border-gray-200 bg-white p-5 text-gray-900 md:right-[500px] md:w-[500px]`}
   class:flyin
   class:flyout
   use:clickOutside
