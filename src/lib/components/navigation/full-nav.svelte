@@ -124,7 +124,7 @@
         <NavRow {isCloud}>
           <Tooltip right hide={$navOpen} text="Logout">
             <div class="nav-icon" on:click={logout}>
-              <Icon name="logout" scale={1} />
+              <Icon name="logout" scale={1.4} />
             </div>
           </Tooltip>
           <div class="nav-title"><Logout {logout} /></div>
