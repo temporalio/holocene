@@ -15,13 +15,9 @@
   }
 </script>
 
-<nav
-  class="h-screen border-r-2 border-gray-200 relative flex transition-width z-0"
-  data-cy="navigation-header"
->
+<nav class="nav-header transition-width " data-cy="navigation-header">
   <div
-    id="navWrapper"
-    class="transition-width bg-gray-900 text-white z-50 pt-3 px-3 flex flex-col justify-between items-center"
+    class="nav-wrapper transition-width"
     class:cloud={isCloud}
     class:open={$navOpen}
     class:close={!$navOpen}
@@ -30,21 +26,21 @@
       <a
         href={linkList.home}
         class="block absolute"
-        style="left: 15px; top: 22px;"
+        style="top: 22px; left: 18px;"
       >
         <Logo height="24px" width="24px" {isCloud} />
       </a>
     </div>
     <button
-      class="absolute"
-      style="top: 22px; right: 0px;"
+      class="nav-toggle transition-left"
+      style="top: 52px;"
       on:click={toggleNav}
     >
       <div class={isCloud ? 'cloudNavIcon' : 'localNavIcon'}>
         <Icon name={$navOpen ? 'navCollapse' : 'navExpand'} scale={1} />
       </div>
     </button>
-    <div class="mt-16 grow items-center">
+    <div class="mt-24 grow items-center">
       <ul class="flex flex-col gap-2">
         <slot name="top" />
       </ul>
@@ -59,6 +55,14 @@
 </nav>
 
 <style lang="postcss">
+  .nav-header {
+    @apply h-screen border-r-2 border-gray-200 relative flex z-0;
+  }
+
+  .nav-wrapper {
+    @apply bg-gray-900 text-white z-50 pt-3 px-3 flex flex-col justify-between items-center;
+  }
+
   .cloud {
     @apply bg-white text-gray-900;
   }
@@ -77,8 +81,32 @@
     width: 100px;
   }
 
+  .nav-toggle {
+    @apply absolute invisible;
+  }
+
+  .nav-header:hover .nav-toggle {
+    @apply visible;
+  }
+
+  .nav-header:focus .nav-toggle {
+    @apply visible;
+  }
+
+  .close .nav-toggle {
+    left: 18px;
+  }
+  .open .nav-toggle {
+    left: 132px;
+  }
+
+  .transition-left {
+    transition: left 0.25s linear, width 0.25s linear;
+    -webkit-transition: left 0.25s linear, width 0.25s linear;
+  }
+
   .transition-width {
-    transition: width 0.25s linear, width 0.25s linear;
-    -webkit-transition: width 0.25s linear, width 0.25s linear;
+    transition: width 0.25s ease-in-out, width 0.25s ease-in-out;
+    -webkit-transition: width 0.25s ease-in-out, width 0.25s ease-in-out;
   }
 </style>
