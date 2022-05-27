@@ -47,7 +47,7 @@
   <svelte:fragment slot="top">
     <NavRow {isCloud} wrap data-cy="namespace-select-button">
       <div
-        class="cursor-pointer relative items-center flex"
+        class="relative flex cursor-pointer items-center"
         on:click={toggleNamespaceSelector}
       >
         <Tooltip right hide={$navOpen} text={activeNamespace ?? 'Namespaces'}>
@@ -181,7 +181,7 @@
 
 <style lang="postcss">
   .nav-icon {
-    @apply h-6 ml-2 mr-2 mt-0 cursor-pointer;
+    @apply ml-2 mr-2 mt-0 h-6 cursor-pointer;
   }
   .nav-title {
     width: 100px;
@@ -190,6 +190,6 @@
     -webkit-transition: width 0.25s linear;
   }
   .profile-row {
-    @apply flex flex-row font-secondary font-medium text-sm py-1 ml-1 rounded-lg items-center;
+    @apply ml-1 flex flex-row items-center rounded-lg py-1 font-secondary text-sm font-medium;
   }
 </style>

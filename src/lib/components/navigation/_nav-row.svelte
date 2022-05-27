@@ -28,7 +28,7 @@
 
 <style lang="postcss">
   .nav-row {
-    @apply flex flex-row font-secondary font-medium text-sm py-1 rounded-lg items-center whitespace-nowrap;
+    @apply flex flex-row items-center whitespace-nowrap rounded-lg py-1 font-secondary text-sm font-medium;
   }
   .wrap {
     @apply whitespace-normal;
