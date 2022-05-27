@@ -151,7 +151,7 @@
               </div>
             {/if}
           </div>
-          <div class="nav-title line-clamp-1">
+          <div class="nav-title truncate">
             {#if user?.name}
               {user?.name}
             {/if}
