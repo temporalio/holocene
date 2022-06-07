@@ -8,8 +8,22 @@
   export let rotate = 0;
   export let scale = 1;
   export let color = '';
+  export let fill = '';
+  export let stroke = '';
 
   $: icon = icons[name];
+
+  function getStroke(path: svelte.JSX.SVGProps<SVGPathElement>) {
+    if (color !== '') return color;
+    if (stroke !== '') return stroke;
+    return path?.stroke ?? ''
+  }
+
+  function getFill(path: svelte.JSX.SVGProps<SVGPathElement>) {
+    if (color !== '') return color;
+    if (fill !== '') return fill;
+    return path?.fill ?? '';
+  }
 </script>
 
 {#if icon}
@@ -22,11 +36,11 @@
     xmlns="http://www.w3.org/2000/svg"
     style="transform: rotate({rotate}deg) scale({scale});"
   >
-    {#each icon.paths as path}
+    {#each icon.paths as path (path.d)}
       <path
         {...path}
-        stroke={color !== '' ? color : path?.stroke ?? ''}
-        fill={color !== '' ? color : path?.fill ?? ''}
+        stroke={getStroke(path)}
+        fill={getFill(path)}
       />
     {/each}
   </svg>
