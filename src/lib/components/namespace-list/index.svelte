@@ -37,9 +37,9 @@
             lastUsedNamespace = namespace.namespace;
           }}
         >
-          <div class="w-6 h-6 pl-3" style="padding-top: 6px;">
+          <div class="w-6 h-6 pl-3 active">
             {#if namespace.namespace === activeNamespace}
-              <Icon name="checkMark" scale={1.2} />
+              <Icon stroke="currentcolor" name="checkMark" />
             {/if}
           </div>
           <a

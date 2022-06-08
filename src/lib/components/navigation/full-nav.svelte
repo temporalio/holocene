@@ -52,7 +52,7 @@
       >
         <Tooltip right hide={$navOpen} text={activeNamespace ?? 'Namespaces'}>
           <div class="nav-icon">
-            <Icon name="namespaceSelect" scale={1.8} />
+            <Icon name="namespaceSelect" scale={1.6} />
           </div>
         </Tooltip>
         <div class="nav-title namespace">
