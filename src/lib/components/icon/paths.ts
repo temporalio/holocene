@@ -203,16 +203,19 @@ const jsonIcon = {
     {
       d: 'M13.5 6L10 18.5',
       stroke: '#111827',
+      fill: 'none',
       'stroke-width': '1.5',
     },
     {
       d: 'M6.5 8.5L3 12L6.5 15.5',
       stroke: '#111827',
+      fill: 'none',
       'stroke-width': '1.5',
     },
     {
       d: 'M17.5 8.5L21 12L17.5 15.5',
       stroke: '#111827',
+      fill: 'none',
       'stroke-width': '1.5',
     },
   ],

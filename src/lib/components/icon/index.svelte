@@ -14,12 +14,14 @@
   $: icon = icons[name];
 
   function getStroke(path: svelte.JSX.SVGProps<SVGPathElement>) {
+    if (path?.stroke === 'none') return '';
     if (color !== '') return color;
     if (stroke !== '') return stroke;
-    return path?.stroke ?? ''
+    return path?.stroke ?? '';
   }
 
   function getFill(path: svelte.JSX.SVGProps<SVGPathElement>) {
+    if (path?.fill === 'none') return '';
     if (color !== '') return color;
     if (fill !== '') return fill;
     return path?.fill ?? '';
