@@ -15,8 +15,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies and build
         run: npm install && npm run build
+      - name: Automated Version Bump
+        run: npm version patch -m "[RELEASE] %s"
       - name: Update package to patch version of package
-        run: npm run package:patch
+        run: npm run package
       - name: Publish package to NPM
         run: npm publish
         working-directory: ./package
