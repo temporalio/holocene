@@ -1,8 +1,6 @@
 <script lang="ts">
   import { icons } from './paths';
   import type { IconName } from './paths';
-  import { getStyles } from './utils'
-  import type { IconSize } from './utils'
 
   export let name: IconName;
   export let width: number = 24;
@@ -12,7 +10,6 @@
   export let color = '';
   export let fill = '';
   export let stroke = '';
-  export let size: IconSize = '1x';
 
   $: icon = icons[name];
 
@@ -27,8 +24,6 @@
     if (fill !== '') return fill;
     return path?.fill ?? '';
   }
-
-  $: style = getStyles(size);
 </script>
 
 {#if icon}
@@ -39,7 +34,6 @@
     class={$$props.class}
     viewBox="0 0 {width} {height}"
     xmlns="http://www.w3.org/2000/svg"
-    {style}
   >
     <g transform="translate({width / 2} {height / 2})" transform-origin="{width / 4} 0">
       <g transform="scale({scale}) rotate({rotate})">
