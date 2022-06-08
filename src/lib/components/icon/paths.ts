@@ -1,4 +1,8 @@
-type Icon = { paths: svelte.JSX.SVGProps<SVGPathElement>[] };
+type Icon = {
+  width?: number;
+  height?: number;
+  paths: svelte.JSX.SVGProps<SVGPathElement>[]
+};
 
 const archiveIcon: Icon = {
   paths: [
@@ -77,10 +81,12 @@ const caretRightIcon: Icon = {
 };
 
 const checkMarkIcon: Icon = {
+  width: 12,
+  height: 14,
   paths: [
     {
       d: 'M11.7482 2.82281C12.083 3.15763 12.083 3.6987 11.7482 4.03352L4.89107 10.8907C4.55625 11.2255 4.01518 11.2255 3.68036 10.8907L0.251036 7.46209C-0.0836786 7.12727 -0.0836786 6.5862 0.251036 6.25138C0.585804 5.91656 1.12848 5.91656 1.4633 6.25138L4.26161 9.07191L10.5375 2.82281C10.8723 2.48745 11.4134 2.48745 11.7482 2.82281Z',
-      fill: '#1D4ED8',
+      fill: '#111827',
     },
   ],
 };
@@ -329,7 +335,7 @@ const workflowIcon: Icon = {
 
 export type IconName = keyof typeof icons;
 
-export const icons = {
+export const icons: { [index: string]: Icon } = {
   archive: archiveIcon,
   arrowDown: arrowDownIcon,
   arrowUp: arrowUpIcon,
