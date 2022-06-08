@@ -1,18 +1,18 @@
 <script lang="ts">
-  const DEFAULT_WIDTH = 24;
-  const DEFAULT_HEIGHT = 24;
-
   import { icons } from './paths';
   import type { IconName } from './paths';
+  import { getStyles } from './utils'
+  import type { IconSize } from './utils'
 
   export let name: IconName;
-  export let width: number | undefined = undefined;
-  export let height: number | undefined = undefined;
+  export let width: number = 24;
+  export let height: number = 24;
   export let rotate = 0;
   export let scale = 1;
   export let color = '';
   export let fill = '';
   export let stroke = '';
+  export let size: IconSize = '1x';
 
   $: icon = icons[name];
 
@@ -28,27 +28,27 @@
     return path?.fill ?? '';
   }
 
-  $: iconWidth =  width ?? icon?.width ?? DEFAULT_WIDTH;
-  $: iconHeight = height ?? icon?.height ?? DEFAULT_HEIGHT;
+  $: style = getStyles(size);
 </script>
 
 {#if icon}
   <svg
-    width={iconWidth}
-    height={iconHeight}
+    width={width}
+    height={height}
     fill="none"
     class={$$props.class}
-    viewBox="0 0 {iconWidth} {iconHeight}"
+    viewBox="0 0 {width} {height}"
     xmlns="http://www.w3.org/2000/svg"
+    {style}
   >
-    <g transform="translate({iconWidth / 2} {iconHeight / 2})" transform-origin="{iconWidth / 4} 0">
+    <g transform="translate({width / 2} {height / 2})" transform-origin="{width / 4} 0">
       <g transform="scale({scale}) rotate({rotate})">
         {#each icon.paths as path (path.d)}
           <path
             {...path}
             stroke={getStroke(path)}
             fill={getFill(path)}
-            transform="translate({iconWidth / -2} {iconHeight / -2})"
+            transform="translate({width / -2} {height / -2})"
           />
         {/each}
       </g>
