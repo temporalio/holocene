@@ -3,8 +3,8 @@
   import type { IconName } from './paths';
 
   export let name: IconName;
-  export let width: number = 24;
-  export let height: number = 24;
+  export let width = 24;
+  export let height = 24;
   export let rotate = 0;
   export let scale = 1;
   export let color = '';
@@ -30,8 +30,8 @@
 
 {#if icon}
   <svg
-    width={width}
-    height={height}
+    {width}
+    {height}
     fill="none"
     class={$$props.class}
     viewBox="0 0 {width} {height}"
